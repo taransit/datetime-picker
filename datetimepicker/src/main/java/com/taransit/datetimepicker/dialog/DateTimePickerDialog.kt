@@ -2,6 +2,8 @@ package com.taransit.datetimepicker.dialog
 
 import android.app.DatePickerDialog
 import android.app.Dialog
+import android.graphics.drawable.GradientDrawable
+import android.graphics.drawable.InsetDrawable
 import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -18,11 +20,32 @@ import com.taransit.datetimepicker.R
 import com.taransit.datetimepicker.ViewPagerAdapter
 import com.taransit.datetimepicker.helper.CalendarHelper
 import kotlinx.android.synthetic.main.dialog_date_time_picker.*
+import kotlinx.android.synthetic.main.dialog_date_time_picker.view.*
 import java.util.*
 import kotlin.math.abs
 
 class DateTimePickerDialog : DialogFragment(),
-    DatePickerDialog.OnDateSetListener {
+        DatePickerDialog.OnDateSetListener {
+
+    class Builder {
+        companion object {
+            const val RADIUS = "radius"
+        }
+
+        private var builderArguments = Bundle()
+
+        fun setRoundedCorners(radius: Float): Builder {
+            builderArguments.putFloat(RADIUS, radius)
+            return this
+        }
+
+        fun build(): DateTimePickerDialog {
+            DateTimePickerDialog().apply {
+                arguments = builderArguments
+                return this
+            }
+        }
+    }
 
     private var listener: DateTimePickerDialogListener? = null
     private var dateAdapter: DateAdapter? = null
@@ -38,6 +61,8 @@ class DateTimePickerDialog : DialogFragment(),
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        val cornerRadius = arguments?.getFloat(Builder.RADIUS) ?: 0f
+        (view.layoutParent.background as GradientDrawable).cornerRadius = cornerRadius
         val viewPagerAdapter = ViewPagerAdapter()
         viewPager.adapter = viewPagerAdapter
         TabLayoutMediator(tabs, viewPager) { tab, position ->
@@ -49,12 +74,19 @@ class DateTimePickerDialog : DialogFragment(),
         dateAdapter = DateAdapter(object : DateAdapter.OnDateClickListener {
             override fun onDateClicked(date: Calendar) {
                 val context = context ?: return
-                DatePickerDialog(context,
-                    this@DateTimePickerDialog,
-                    date.get(Calendar.YEAR),
-                    date.get(Calendar.MONTH),
-                    date.get(Calendar.DAY_OF_MONTH)
-                ).show()
+                object : DatePickerDialog(context,
+                        this@DateTimePickerDialog,
+                        date.get(Calendar.YEAR),
+                        date.get(Calendar.MONTH),
+                        date.get(Calendar.DAY_OF_MONTH)
+                ){
+                    override fun onCreate(savedInstanceState: Bundle?) {
+                        val backgroundDrawable = context.getDrawable(R.drawable.layout_background)
+                        (backgroundDrawable as GradientDrawable).cornerRadius = cornerRadius
+                        window?.setBackgroundDrawable(backgroundDrawable)
+                        super.onCreate(savedInstanceState)
+                    }
+                }.show()
             }
         })
         dates.adapter = dateAdapter
@@ -82,9 +114,9 @@ class DateTimePickerDialog : DialogFragment(),
         dates.setPageTransformer { page, position ->
             val absPos = abs(position)
             page.apply {
-                    val scale = if (absPos > 1) 0F else 1 - absPos
-                    scaleX = scale
-                    scaleY = scale
+                val scale = if (absPos > 1) 0F else 1 - absPos
+                scaleX = scale
+                scaleY = scale
             }
         }
 
@@ -120,6 +152,9 @@ class DateTimePickerDialog : DialogFragment(),
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         val dialog = super.onCreateDialog(savedInstanceState)
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+        val background = dialog.window?.decorView?.background as? InsetDrawable
+        background?.alpha = 0
+        dialog.window?.setBackgroundDrawable(background)
         return dialog
     }
 
@@ -142,7 +177,7 @@ class DateTimePickerDialog : DialogFragment(),
 
     override fun onDateSet(view: DatePicker?, year: Int, month: Int, dayOfMonth: Int) {
         CalendarHelper.createDayStartCalendar(year, month, dayOfMonth)
-            .let(::setDate)
+                .let(::setDate)
     }
 
     private fun setDate(day: Calendar = Calendar.getInstance()) {
