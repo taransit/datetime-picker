@@ -24,7 +24,7 @@ import kotlinx.android.synthetic.main.dialog_date_time_picker.view.*
 import java.util.*
 import kotlin.math.abs
 
-class DateTimePickerDialog : DialogFragment(),
+class DateTimePickerDialog(val cornerRadius: Float = 0f) : DialogFragment(),
         DatePickerDialog.OnDateSetListener {
 
     class Builder {
@@ -61,7 +61,7 @@ class DateTimePickerDialog : DialogFragment(),
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val cornerRadius = arguments?.getFloat(Builder.RADIUS) ?: 0f
+        val cornerRadius = arguments?.getFloat(Builder.RADIUS) ?: this.cornerRadius
         (view.layoutParent.background as GradientDrawable).cornerRadius = cornerRadius
         val viewPagerAdapter = ViewPagerAdapter()
         viewPager.adapter = viewPagerAdapter
