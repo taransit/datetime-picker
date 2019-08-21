@@ -14,17 +14,14 @@ import android.widget.DatePicker
 import androidx.fragment.app.DialogFragment
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.tabs.TabLayoutMediator
-import com.taransit.datetimepicker.DateAdapter
-import com.taransit.datetimepicker.Direction
-import com.taransit.datetimepicker.R
-import com.taransit.datetimepicker.ViewPagerAdapter
+import com.taransit.datetimepicker.*
 import com.taransit.datetimepicker.helper.CalendarHelper
 import kotlinx.android.synthetic.main.dialog_date_time_picker.*
 import kotlinx.android.synthetic.main.dialog_date_time_picker.view.*
 import java.util.*
 import kotlin.math.abs
 
-class DateTimePickerDialog(val cornerRadius: Float = 0f) : DialogFragment(),
+class DateTimePickerDialog(private val cornerRadius: Float = 0f) : DialogFragment(),
         DatePickerDialog.OnDateSetListener {
 
     class Builder {
@@ -74,19 +71,13 @@ class DateTimePickerDialog(val cornerRadius: Float = 0f) : DialogFragment(),
         dateAdapter = DateAdapter(object : DateAdapter.OnDateClickListener {
             override fun onDateClicked(date: Calendar) {
                 val context = context ?: return
-                object : DatePickerDialog(context,
+                RoundedDatePickerDialog(context,
                         this@DateTimePickerDialog,
                         date.get(Calendar.YEAR),
                         date.get(Calendar.MONTH),
-                        date.get(Calendar.DAY_OF_MONTH)
-                ){
-                    override fun onCreate(savedInstanceState: Bundle?) {
-                        val backgroundDrawable = context.getDrawable(R.drawable.layout_background)
-                        (backgroundDrawable as GradientDrawable).cornerRadius = cornerRadius
-                        window?.setBackgroundDrawable(backgroundDrawable)
-                        super.onCreate(savedInstanceState)
-                    }
-                }.show()
+                        date.get(Calendar.DAY_OF_MONTH),
+                        cornerRadius
+                ).show()
             }
         })
         dates.adapter = dateAdapter
