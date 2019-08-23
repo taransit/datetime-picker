@@ -20,7 +20,7 @@ class MainActivity : AppCompatActivity(), DateTimePickerDialog.DateTimePickerDia
                 ft.remove(prev)
             }
             ft.addToBackStack(null)
-            val dialogFragment = DateTimePickerDialog()
+            val dialogFragment = DateTimePickerDialog.Builder().setRoundedCorners(60f).build()
             dialogFragment.setListener(this@MainActivity)
             dialogFragment.show(ft, DateTimePickerDialog::class.java.simpleName)
         }
