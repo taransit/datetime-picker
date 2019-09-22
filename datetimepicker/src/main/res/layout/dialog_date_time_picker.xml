@@ -82,10 +82,12 @@
                 android:id="@+id/showToday"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="32dp"
                 android:background="?attr/selectableItemBackground"
                 android:gravity="center_horizontal"
-                android:text="Reset to current time"/>
+                android:padding="32dp"
+                android:text="Reset to current time"
+                android:textColor="@color/colorAccent"
+                android:textAllCaps="false" />
 
         </LinearLayout>
 

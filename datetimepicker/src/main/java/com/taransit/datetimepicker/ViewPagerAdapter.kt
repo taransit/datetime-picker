@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 
 class ViewPagerAdapter : RecyclerView.Adapter<ViewPagerAdapter.PagerViewHolder>() {
 
-    val TABS = listOf("Departure", "Arrival")
+    val TABS = listOf("Departure at", "Arrival by")
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PagerViewHolder {
         return LayoutInflater
