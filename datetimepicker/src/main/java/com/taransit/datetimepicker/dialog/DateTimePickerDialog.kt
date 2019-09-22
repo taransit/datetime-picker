@@ -21,18 +21,32 @@ import kotlinx.android.synthetic.main.dialog_date_time_picker.view.*
 import java.util.*
 import kotlin.math.abs
 
-class DateTimePickerDialog(private val cornerRadius: Float = 0f) : DialogFragment(),
-        DatePickerDialog.OnDateSetListener {
+class DateTimePickerDialog(
+    private val cornerRadius: Float = 0f,
+    private val initialHours: Int? = null,
+    private val initialMinutes: Int? = null,
+    private val initialDate: Calendar? = null
+) : DialogFragment(), DatePickerDialog.OnDateSetListener {
 
     class Builder {
         companion object {
             const val RADIUS = "radius"
+            const val HOURS = "hours"
+            const val MINUTES = "minutes"
+            const val DATE = "date"
         }
 
         private var builderArguments = Bundle()
 
         fun setRoundedCorners(radius: Float): Builder {
             builderArguments.putFloat(RADIUS, radius)
+            return this
+        }
+
+        fun setInitialTimeAndDate(hours: Int, minutes: Int, date: Calendar? = null): Builder {
+            builderArguments.putInt(HOURS, hours)
+            builderArguments.putInt(MINUTES, minutes)
+            builderArguments.putSerializable(DATE, date)
             return this
         }
 
@@ -59,6 +73,10 @@ class DateTimePickerDialog(private val cornerRadius: Float = 0f) : DialogFragmen
         super.onViewCreated(view, savedInstanceState)
 
         val cornerRadius = arguments?.getFloat(Builder.RADIUS) ?: this.cornerRadius
+        val initialHours = arguments?.getInt(Builder.HOURS) ?: this.initialHours
+        val initialMinutes = arguments?.getInt(Builder.MINUTES) ?: this.initialMinutes
+        val initialDate = arguments?.getSerializable(Builder.DATE) ?: this.initialDate
+
         (view.layoutParent.background as GradientDrawable).cornerRadius = cornerRadius
         val viewPagerAdapter = ViewPagerAdapter()
         viewPager.adapter = viewPagerAdapter
@@ -114,8 +132,8 @@ class DateTimePickerDialog(private val cornerRadius: Float = 0f) : DialogFragmen
         back.setOnClickListener { dates.currentItem = dates.currentItem - 1 }
         forward.setOnClickListener { dates.currentItem = dates.currentItem + 1 }
 
-        showToday.setOnClickListener { showNow() }
-        showNow()
+        showToday.setOnClickListener { showTime() }
+        showTime(initialHours, initialMinutes, initialDate as? Calendar ?: Calendar.getInstance())
 
         cancel.setOnClickListener { dismissAllowingStateLoss() }
         confirm.setOnClickListener {
@@ -149,21 +167,18 @@ class DateTimePickerDialog(private val cornerRadius: Float = 0f) : DialogFragmen
         return dialog
     }
 
-    private fun showNow() {
-        val now = Calendar.getInstance()
-        val nowHour = now.get(Calendar.HOUR_OF_DAY)
-        val nowMinute = now.get(Calendar.MINUTE)
+    private fun showTime(hours: Int? = null, minutes: Int? = null, date: Calendar = Calendar.getInstance()) {
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
             @Suppress("DEPRECATION")
-            timePicker.currentHour = nowHour
+            timePicker.currentHour = hours ?: date.get(Calendar.HOUR_OF_DAY)
             @Suppress("DEPRECATION")
-            timePicker.currentMinute = nowMinute
+            timePicker.currentMinute = minutes ?: date.get(Calendar.MINUTE)
         } else {
-            timePicker.hour = nowHour
-            timePicker.minute = nowMinute
+            timePicker.hour = hours ?: date.get(Calendar.HOUR_OF_DAY)
+            timePicker.minute = minutes ?: date.get(Calendar.MINUTE)
         }
 
-        setDate()
+        setDate(date)
     }
 
     override fun onDateSet(view: DatePicker?, year: Int, month: Int, dayOfMonth: Int) {
