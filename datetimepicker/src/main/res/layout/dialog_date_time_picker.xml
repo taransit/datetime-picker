@@ -13,6 +13,11 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/tabs"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -20,11 +25,6 @@
             android:layout_marginEnd="16dp"
             android:layout_marginStart="16dp"
             android:orientation="vertical">
-
-            <com.google.android.material.tabs.TabLayout
-                android:id="@+id/tabs"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
 
             <androidx.viewpager2.widget.ViewPager2
                 android:id="@+id/viewPager"
@@ -78,6 +78,8 @@
                 android:layout_height="2dp"
                 android:background="#979797"/>
 
+<!-- TODO: do not rely on the user to override colorAccent with his desired color -->
+
             <Button
                 android:id="@+id/showToday"
                 android:layout_width="match_parent"
@@ -85,7 +87,7 @@
                 android:background="?attr/selectableItemBackground"
                 android:gravity="center_horizontal"
                 android:padding="32dp"
-                android:text="Reset to current time"
+                android:text="@string/reset_time"
                 android:textColor="@color/colorAccent"
                 android:textAllCaps="false" />
 
@@ -107,6 +109,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:background="?attr/selectableItemBackground"
                 android:text="@android:string/cancel"
                 android:textAllCaps="true"
                 style="?android:attr/buttonBarButtonStyle"/>

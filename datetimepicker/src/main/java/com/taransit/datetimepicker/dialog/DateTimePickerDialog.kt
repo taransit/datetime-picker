@@ -78,7 +78,7 @@ class DateTimePickerDialog(
         val initialDate = arguments?.getSerializable(Builder.DATE) ?: this.initialDate
 
         (view.layoutParent.background as GradientDrawable).cornerRadius = cornerRadius
-        val viewPagerAdapter = ViewPagerAdapter()
+        val viewPagerAdapter = ViewPagerAdapter(requireContext())
         viewPager.adapter = viewPagerAdapter
         TabLayoutMediator(tabs, viewPager) { tab, position ->
             tab.text = viewPagerAdapter.TABS[position]
