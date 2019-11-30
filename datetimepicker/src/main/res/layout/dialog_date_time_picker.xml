@@ -4,9 +4,7 @@
     android:id="@+id/layoutParent"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/layout_background"
-    android:layout_margin="40dp"
-    android:minWidth="300dp">
+    android:background="@drawable/layout_background">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -21,7 +19,6 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
             android:layout_marginStart="16dp"
             android:orientation="vertical">
@@ -110,6 +107,7 @@
                 android:background="?attr/selectableItemBackground"
                 android:text="@android:string/cancel"
                 android:textAllCaps="true"
+                android:textStyle="bold"
                 style="?android:attr/buttonBarButtonStyle"/>
 
             <Button
@@ -120,6 +118,7 @@
                 android:background="?attr/selectableItemBackground"
                 android:text="@android:string/ok"
                 android:textAllCaps="true"
+                android:textStyle="bold"
                 style="?android:attr/buttonBarButtonStyle"/>
 
         </LinearLayout>

@@ -128,12 +128,13 @@ class DateTimePickerDialog(
     }
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-        val dialog = super.onCreateDialog(savedInstanceState)
-        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
-        val background = dialog.window?.decorView?.background as? InsetDrawable
-        background?.alpha = 0
-        dialog.window?.setBackgroundDrawable(background)
-        return dialog
+        return super.onCreateDialog(savedInstanceState).apply {
+            requestWindowFeature(Window.FEATURE_NO_TITLE)
+            val background = window?.decorView?.background as? InsetDrawable
+            background?.alpha = 0
+            window?.setBackgroundDrawable(background)
+            window?.setLayout(resources.getDimensionPixelSize(R.dimen.dialog_width), -2)
+        }
     }
 
     private fun showTime(date: Calendar = Calendar.getInstance()) {

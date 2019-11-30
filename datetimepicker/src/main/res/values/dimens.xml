@@ -1,4 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
+    <!-- COMMON DIMENS -->
+    <dimen name="margin_double">32dp</dimen>
+    <dimen name="margin_default">16dp</dimen>
+    <dimen name="margin_half">8dp</dimen>
+    <dimen name="margin_quarter">4dp</dimen>
+
+    <dimen name="padding_double">@dimen/margin_double</dimen>
+    <dimen name="padding_default">@dimen/margin_default</dimen>
+    <dimen name="padding_half">@dimen/margin_half</dimen>
+    <dimen name="padding_quarter">@dimen/margin_quarter</dimen>
+
+    <dimen name="match_parent">-1px</dimen>
+    <dimen name="wrap_content">-2px</dimen>
+
     <dimen name="divider_line_size">1dp</dimen>
+
+    <dimen name="dialog_width">350dp</dimen>
 </resources>
