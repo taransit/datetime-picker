@@ -5,9 +5,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 
-class ViewPagerAdapter : RecyclerView.Adapter<ViewPagerAdapter.PagerViewHolder>() {
-
-    val TABS = listOf("Departure", "Arrival")
+class ViewPagerAdapter(private val pages: List<String>) : RecyclerView.Adapter<ViewPagerAdapter.PagerViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PagerViewHolder {
         return LayoutInflater
@@ -15,7 +13,7 @@ class ViewPagerAdapter : RecyclerView.Adapter<ViewPagerAdapter.PagerViewHolder>(
             .let(::PagerViewHolder)
     }
 
-    override fun getItemCount(): Int = TABS.size
+    override fun getItemCount(): Int = pages.size
 
     override fun onBindViewHolder(holder: PagerViewHolder, position: Int) {}
 

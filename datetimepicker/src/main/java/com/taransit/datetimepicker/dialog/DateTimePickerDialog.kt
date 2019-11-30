@@ -11,10 +11,16 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.Window
 import android.widget.DatePicker
+import androidx.annotation.StringRes
+import androidx.annotation.StyleRes
+import androidx.appcompat.view.ContextThemeWrapper
 import androidx.fragment.app.DialogFragment
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.tabs.TabLayoutMediator
-import com.taransit.datetimepicker.*
+import com.taransit.datetimepicker.DateAdapter
+import com.taransit.datetimepicker.R
+import com.taransit.datetimepicker.RoundedDatePickerDialog
+import com.taransit.datetimepicker.ViewPagerAdapter
 import com.taransit.datetimepicker.helper.CalendarHelper
 import kotlinx.android.synthetic.main.dialog_date_time_picker.*
 import kotlinx.android.synthetic.main.dialog_date_time_picker.view.*
@@ -23,57 +29,39 @@ import kotlin.math.abs
 
 class DateTimePickerDialog(
     private val cornerRadius: Float = 0f,
-    private val initialDate: Calendar = Calendar.getInstance()
+    private val initialDate: Calendar = Calendar.getInstance(),
+    private val pages: List<String> = listOf(),
+    @StyleRes
+    private val customTheme: Int = 0,
+    @StringRes
+    private val positiveButtonText: Int = android.R.string.ok,
+    @StringRes
+    private val negativeButtonText: Int = android.R.string.cancel
 ) : DialogFragment(), DatePickerDialog.OnDateSetListener {
 
-    class Builder {
-        companion object {
-            const val RADIUS = "radius"
-            const val DATE = "date"
-        }
-
-        private var builderArguments = Bundle()
-
-        fun setRoundedCorners(radius: Float): Builder {
-            builderArguments.putFloat(RADIUS, radius)
-            return this
-        }
-
-        fun setInitialTimeAndDate(date: Calendar = Calendar.getInstance()): Builder {
-            builderArguments.putSerializable(DATE, date)
-            return this
-        }
-
-        fun build(): DateTimePickerDialog {
-            DateTimePickerDialog().apply {
-                arguments = builderArguments
-                return this
-            }
-        }
+    companion object {
+        private const val WRAP_CONTENT = -2
     }
 
-    private var listener: DateTimePickerDialogListener? = null
+    private var mListener: Listener? = null
     private var dateAdapter: DateAdapter? = null
 
-    fun setListener(listener: DateTimePickerDialogListener) {
-        this.listener = listener
+    fun setListener(listener: Listener) {
+        this.mListener = listener
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.dialog_date_time_picker, container, false)
+        return View.inflate(ContextThemeWrapper(context, customTheme), R.layout.dialog_date_time_picker, container)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val cornerRadius = arguments?.getFloat(Builder.RADIUS) ?: this.cornerRadius
-        val initialDate = arguments?.getSerializable(Builder.DATE) ?: this.initialDate
-
         (view.layoutParent.background as GradientDrawable).cornerRadius = cornerRadius
-        val viewPagerAdapter = ViewPagerAdapter()
+        val viewPagerAdapter = ViewPagerAdapter(pages)
         viewPager.adapter = viewPagerAdapter
         TabLayoutMediator(tabs, viewPager) { tab, position ->
-            tab.text = viewPagerAdapter.TABS[position]
+            tab.text = pages[position]
         }.attach()
 
         timePicker.setIs24HourView(true)
@@ -125,7 +113,7 @@ class DateTimePickerDialog(
         forward.setOnClickListener { dates.currentItem = dates.currentItem + 1 }
 
         showToday.setOnClickListener { showTime() }
-        showTime(initialDate as Calendar)
+        showTime(initialDate)
 
         cancel.setOnClickListener { dismissAllowingStateLoss() }
         confirm.setOnClickListener {
@@ -145,18 +133,22 @@ class DateTimePickerDialog(
                 calendar.set(Calendar.MINUTE, timePicker.minute)
             }
 
-            listener?.onDateTimeSet(calendar, Direction.from(viewPager.currentItem))
+            mListener?.onDateTimeSet(calendar, pages.getOrNull(viewPager.currentItem))
             dismissAllowingStateLoss()
         }
+
+        cancel.setText(negativeButtonText)
+        confirm.setText(positiveButtonText)
     }
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-        val dialog = super.onCreateDialog(savedInstanceState)
-        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
-        val background = dialog.window?.decorView?.background as? InsetDrawable
-        background?.alpha = 0
-        dialog.window?.setBackgroundDrawable(background)
-        return dialog
+        return super.onCreateDialog(savedInstanceState).apply {
+            requestWindowFeature(Window.FEATURE_NO_TITLE)
+            val background = window?.decorView?.background as? InsetDrawable
+            background?.alpha = 0
+            window?.setBackgroundDrawable(background)
+            window?.setLayout(resources.getDimensionPixelSize(R.dimen.dialog_width), WRAP_CONTENT)
+        }
     }
 
     private fun showTime(date: Calendar = Calendar.getInstance()) {
@@ -190,7 +182,7 @@ class DateTimePickerDialog(
         }
     }
 
-    interface DateTimePickerDialogListener {
-        fun onDateTimeSet(calendar: Calendar, direction: Direction)
+    interface Listener {
+        fun onDateTimeSet(calendar: Calendar, page: String?)
     }
 }

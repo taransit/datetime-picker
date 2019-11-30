@@ -4,27 +4,24 @@
     android:id="@+id/layoutParent"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/layout_background"
-    android:layout_margin="40dp"
-    android:minWidth="300dp">
+    android:background="@drawable/layout_background">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/tabs"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
             android:layout_marginStart="16dp"
             android:orientation="vertical">
-
-            <com.google.android.material.tabs.TabLayout
-                android:id="@+id/tabs"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
 
             <androidx.viewpager2.widget.ViewPager2
                 android:id="@+id/viewPager"
@@ -40,8 +37,8 @@
 
             <View
                 android:layout_width="match_parent"
-                android:layout_height="2dp"
-                android:background="#979797"/>
+                android:layout_height="@dimen/divider_line_size"
+                android:background="@color/divider_line"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -75,24 +72,26 @@
 
             <View
                 android:layout_width="match_parent"
-                android:layout_height="2dp"
-                android:background="#979797"/>
+                android:layout_height="@dimen/divider_line_size"
+                android:background="@color/divider_line"/>
 
             <Button
                 android:id="@+id/showToday"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="32dp"
                 android:background="?attr/selectableItemBackground"
                 android:gravity="center_horizontal"
-                android:text="Reset to current time"/>
+                android:padding="32dp"
+                android:text="@string/reset_time"
+                android:textColor="?attr/colorAccent"
+                android:textAllCaps="false" />
 
         </LinearLayout>
 
         <View
             android:layout_width="match_parent"
-            android:layout_height="2dp"
-            android:background="#979797"/>
+            android:layout_height="@dimen/divider_line_size"
+            android:background="@color/divider_line"/>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -105,8 +104,10 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:background="?attr/selectableItemBackground"
                 android:text="@android:string/cancel"
                 android:textAllCaps="true"
+                android:textStyle="bold"
                 style="?android:attr/buttonBarButtonStyle"/>
 
             <Button
@@ -117,6 +118,7 @@
                 android:background="?attr/selectableItemBackground"
                 android:text="@android:string/ok"
                 android:textAllCaps="true"
+                android:textStyle="bold"
                 style="?android:attr/buttonBarButtonStyle"/>
 
         </LinearLayout>
