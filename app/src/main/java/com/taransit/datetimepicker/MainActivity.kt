@@ -21,10 +21,10 @@ class MainActivity : AppCompatActivity(), DateTimePickerDialog.DateTimePickerDia
             }
             ft.addToBackStack(null)
             val date = Calendar.getInstance()
-            date.set(2015, 9, 28)
+            date.set(2015, 9, 28, 4, 20)
             val dialogFragment = DateTimePickerDialog.Builder()
                 .setRoundedCorners(60f)
-                .setInitialTimeAndDate(4, 20, date)
+                .setInitialTimeAndDate(date)
                 .build()
             dialogFragment.setListener(this@MainActivity)
             dialogFragment.show(ft, DateTimePickerDialog::class.java.simpleName)
