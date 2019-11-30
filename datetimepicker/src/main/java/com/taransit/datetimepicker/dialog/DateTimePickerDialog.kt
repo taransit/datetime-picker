@@ -11,6 +11,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.Window
 import android.widget.DatePicker
+import androidx.annotation.StringRes
+import androidx.annotation.StyleRes
 import androidx.appcompat.view.ContextThemeWrapper
 import androidx.fragment.app.DialogFragment
 import androidx.viewpager2.widget.ViewPager2
@@ -29,7 +31,12 @@ class DateTimePickerDialog(
     private val cornerRadius: Float = 0f,
     private val initialDate: Calendar = Calendar.getInstance(),
     private val pages: List<String> = listOf(),
-    private val customTheme: Int = 0
+    @StyleRes
+    private val customTheme: Int = 0,
+    @StringRes
+    private val positiveButtonText: Int = android.R.string.ok,
+    @StringRes
+    private val negativeButtonText: Int = android.R.string.cancel
 ) : DialogFragment(), DatePickerDialog.OnDateSetListener {
 
     private var mListener: Listener? = null
@@ -125,6 +132,9 @@ class DateTimePickerDialog(
             mListener?.onDateTimeSet(calendar, pages.getOrNull(viewPager.currentItem))
             dismissAllowingStateLoss()
         }
+
+        cancel.setText(negativeButtonText)
+        confirm.setText(positiveButtonText)
     }
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
