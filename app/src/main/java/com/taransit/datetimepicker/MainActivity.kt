@@ -23,7 +23,8 @@ class MainActivity : AppCompatActivity(), DateTimePickerDialog.DateTimePickerDia
             DateTimePickerDialog(
                 cornerRadius = 20f,
                 initialDate = Calendar.getInstance().apply { set(2015, 9, 28, 4, 20) },
-                pages = listOf("Departure", "Arrival")
+                pages = listOf("Departure", "Arrival"),
+                customTheme = R.style.CustomTimePickerTheme
             ).apply {
                 setListener(this@MainActivity)
                 show(ft, DateTimePickerDialog::class.java.simpleName)

@@ -11,7 +11,7 @@ object CalendarHelper {
     }
 
     fun createDayStartCalendar(calendar: Calendar): Calendar {
-        val day = calendar.apply {
+        return calendar.apply {
             set(Calendar.AM_PM, 0)
             set(Calendar.HOUR, 0)
             set(Calendar.HOUR_OF_DAY, 0)
@@ -19,6 +19,5 @@ object CalendarHelper {
             set(Calendar.SECOND, 0)
             set(Calendar.MILLISECOND, 0)
         }
-        return day
     }
 }

@@ -9,7 +9,7 @@ import kotlinx.android.synthetic.main.item_date.view.*
 import java.text.DateFormat
 import java.util.*
 
-class DateAdapter(val listener: OnDateClickListener) : RecyclerView.Adapter<DateAdapter.DateViewHolder>() {
+class DateAdapter(private val listener: OnDateClickListener) : RecyclerView.Adapter<DateAdapter.DateViewHolder>() {
 
     companion object {
         const val DAYS_SPREAD = 40
