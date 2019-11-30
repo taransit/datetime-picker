@@ -14,7 +14,10 @@ import android.widget.DatePicker
 import androidx.fragment.app.DialogFragment
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.tabs.TabLayoutMediator
-import com.taransit.datetimepicker.*
+import com.taransit.datetimepicker.DateAdapter
+import com.taransit.datetimepicker.R
+import com.taransit.datetimepicker.RoundedDatePickerDialog
+import com.taransit.datetimepicker.ViewPagerAdapter
 import com.taransit.datetimepicker.helper.CalendarHelper
 import kotlinx.android.synthetic.main.dialog_date_time_picker.*
 import kotlinx.android.synthetic.main.dialog_date_time_picker.view.*
@@ -23,7 +26,8 @@ import kotlin.math.abs
 
 class DateTimePickerDialog(
     private val cornerRadius: Float = 0f,
-    private val initialDate: Calendar = Calendar.getInstance()
+    private val initialDate: Calendar = Calendar.getInstance(),
+    private val pages: List<String> = listOf()
 ) : DialogFragment(), DatePickerDialog.OnDateSetListener {
 
     class Builder {
@@ -145,7 +149,7 @@ class DateTimePickerDialog(
                 calendar.set(Calendar.MINUTE, timePicker.minute)
             }
 
-            listener?.onDateTimeSet(calendar, Direction.from(viewPager.currentItem))
+            listener?.onDateTimeSet(calendar, pages.getOrNull(viewPager.currentItem))
             dismissAllowingStateLoss()
         }
     }
@@ -191,6 +195,6 @@ class DateTimePickerDialog(
     }
 
     interface DateTimePickerDialogListener {
-        fun onDateTimeSet(calendar: Calendar, direction: Direction)
+        fun onDateTimeSet(calendar: Calendar, page: String?)
     }
 }
