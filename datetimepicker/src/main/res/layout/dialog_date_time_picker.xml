@@ -40,8 +40,8 @@
 
             <View
                 android:layout_width="match_parent"
-                android:layout_height="2dp"
-                android:background="#979797"/>
+                android:layout_height="@dimen/divider_line_size"
+                android:background="@color/divider_line"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -75,10 +75,8 @@
 
             <View
                 android:layout_width="match_parent"
-                android:layout_height="2dp"
-                android:background="#979797"/>
-
-<!-- TODO: do not rely on the user to override colorAccent with his desired color -->
+                android:layout_height="@dimen/divider_line_size"
+                android:background="@color/divider_line"/>
 
             <Button
                 android:id="@+id/showToday"
@@ -95,8 +93,8 @@
 
         <View
             android:layout_width="match_parent"
-            android:layout_height="2dp"
-            android:background="#979797"/>
+            android:layout_height="@dimen/divider_line_size"
+            android:background="@color/divider_line"/>
 
         <LinearLayout
             android:layout_width="match_parent"

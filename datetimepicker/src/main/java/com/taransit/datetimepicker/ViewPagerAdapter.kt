@@ -1,15 +1,11 @@
 package com.taransit.datetimepicker
 
-import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 
-class ViewPagerAdapter(
-    context: Context,
-    private val pages: List<String>
-) : RecyclerView.Adapter<ViewPagerAdapter.PagerViewHolder>() {
+class ViewPagerAdapter(private val pages: List<String>) : RecyclerView.Adapter<ViewPagerAdapter.PagerViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PagerViewHolder {
         return LayoutInflater

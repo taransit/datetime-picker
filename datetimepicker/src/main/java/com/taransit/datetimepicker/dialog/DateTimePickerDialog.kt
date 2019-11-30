@@ -47,7 +47,7 @@ class DateTimePickerDialog(
         super.onViewCreated(view, savedInstanceState)
 
         (view.layoutParent.background as GradientDrawable).cornerRadius = cornerRadius
-        val viewPagerAdapter = ViewPagerAdapter(requireContext(), pages)
+        val viewPagerAdapter = ViewPagerAdapter(pages)
         viewPager.adapter = viewPagerAdapter
         TabLayoutMediator(tabs, viewPager) { tab, position ->
             tab.text = pages[position]
