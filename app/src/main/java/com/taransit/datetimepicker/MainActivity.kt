@@ -7,7 +7,7 @@ import com.taransit.datetimepicker.dialog.DateTimePickerDialog
 import kotlinx.android.synthetic.main.activity_main.*
 import java.util.*
 
-class MainActivity : AppCompatActivity(), DateTimePickerDialog.DateTimePickerDialogListener {
+class MainActivity : AppCompatActivity(), DateTimePickerDialog.Listener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

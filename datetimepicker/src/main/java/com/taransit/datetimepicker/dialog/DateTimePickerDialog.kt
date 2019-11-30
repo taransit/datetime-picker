@@ -32,11 +32,11 @@ class DateTimePickerDialog(
     private val customTheme: Int = 0
 ) : DialogFragment(), DatePickerDialog.OnDateSetListener {
 
-    private var listener: DateTimePickerDialogListener? = null
+    private var mListener: Listener? = null
     private var dateAdapter: DateAdapter? = null
 
-    fun setListener(listener: DateTimePickerDialogListener) {
-        this.listener = listener
+    fun setListener(listener: Listener) {
+        this.mListener = listener
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -122,7 +122,7 @@ class DateTimePickerDialog(
                 calendar.set(Calendar.MINUTE, timePicker.minute)
             }
 
-            listener?.onDateTimeSet(calendar, pages.getOrNull(viewPager.currentItem))
+            mListener?.onDateTimeSet(calendar, pages.getOrNull(viewPager.currentItem))
             dismissAllowingStateLoss()
         }
     }
@@ -167,7 +167,7 @@ class DateTimePickerDialog(
         }
     }
 
-    interface DateTimePickerDialogListener {
+    interface Listener {
         fun onDateTimeSet(calendar: Calendar, page: String?)
     }
 }
