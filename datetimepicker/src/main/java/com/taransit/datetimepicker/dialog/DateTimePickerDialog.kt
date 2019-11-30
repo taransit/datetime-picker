@@ -39,6 +39,10 @@ class DateTimePickerDialog(
     private val negativeButtonText: Int = android.R.string.cancel
 ) : DialogFragment(), DatePickerDialog.OnDateSetListener {
 
+    companion object {
+        private const val WRAP_CONTENT = -2
+    }
+
     private var mListener: Listener? = null
     private var dateAdapter: DateAdapter? = null
 
@@ -143,7 +147,7 @@ class DateTimePickerDialog(
             val background = window?.decorView?.background as? InsetDrawable
             background?.alpha = 0
             window?.setBackgroundDrawable(background)
-            window?.setLayout(resources.getDimensionPixelSize(R.dimen.dialog_width), -2)
+            window?.setLayout(resources.getDimensionPixelSize(R.dimen.dialog_width), WRAP_CONTENT)
         }
     }
 
