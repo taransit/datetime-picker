@@ -24,6 +24,7 @@ class MainActivity : AppCompatActivity(), DateTimePickerDialog.Listener {
                 cornerRadius = 20f,
                 initialDate = Calendar.getInstance().apply { set(2015, 9, 28, 4, 20) },
                 pages = listOf("Departure", "Arrival"),
+                initialPagePosition = 1,
                 customTheme = R.style.CustomTimePickerTheme
             ).apply {
                 setListener(this@MainActivity)
@@ -34,7 +35,7 @@ class MainActivity : AppCompatActivity(), DateTimePickerDialog.Listener {
         show_dialog.performClick()
     }
 
-    override fun onDateTimeSet(calendar: Calendar, page: String?) {
+    override fun onDateTimeSet(calendar: Calendar, page: Int) {
         Log.d("Test", calendar.toString())
         Log.d("Test", "$page")
     }

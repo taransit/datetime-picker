@@ -31,6 +31,7 @@ class DateTimePickerDialog(
     private val cornerRadius: Float = 0f,
     private val initialDate: Calendar = Calendar.getInstance(),
     private val pages: List<String> = listOf(),
+    private val initialPagePosition: Int = 0,
     @StyleRes
     private val customTheme: Int = 0,
     @StringRes
@@ -63,6 +64,7 @@ class DateTimePickerDialog(
         TabLayoutMediator(tabs, viewPager) { tab, position ->
             tab.text = pages[position]
         }.attach()
+        viewPager.setCurrentItem(initialPagePosition, false)
 
         timePicker.setIs24HourView(true)
 
@@ -133,7 +135,7 @@ class DateTimePickerDialog(
                 calendar.set(Calendar.MINUTE, timePicker.minute)
             }
 
-            mListener?.onDateTimeSet(calendar, pages.getOrNull(viewPager.currentItem))
+            mListener?.onDateTimeSet(calendar, viewPager.currentItem)
             dismissAllowingStateLoss()
         }
 
@@ -183,6 +185,6 @@ class DateTimePickerDialog(
     }
 
     interface Listener {
-        fun onDateTimeSet(calendar: Calendar, page: String?)
+        fun onDateTimeSet(calendar: Calendar, page: Int)
     }
 }
