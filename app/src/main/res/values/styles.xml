@@ -6,8 +6,6 @@
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
         <item name="android:windowBackground">@color/colorBackground</item>
-        <item name="android:fontFamily">@font/hind_vadodara</item>
-        <item name="fontFamily">@font/hind_vadodara</item>
         <item name="buttonStyle">@style/ButtonStyle</item>
         <item name="tabStyle">@style/TabStyle</item>
         <item name="android:windowLightStatusBar" tools:targetApi="23">true</item>
@@ -19,6 +17,7 @@
 
     <style name="CustomTimePickerTheme">
         <item name="android:textSize">16sp</item>
+        <item name="colorPrimary">#FF00AA</item>
     </style>
 
     <style name="TabStyle" parent="Widget.Design.TabLayout">

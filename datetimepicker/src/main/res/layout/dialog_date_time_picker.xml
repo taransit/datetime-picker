@@ -79,11 +79,9 @@
                 android:id="@+id/showToday"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="?attr/selectableItemBackground"
                 android:gravity="center_horizontal"
-                android:padding="32dp"
+                android:padding="24dp"
                 android:text="@string/reset_time"
-                android:textColor="?attr/colorAccent"
                 android:textAllCaps="false"
                 style="@style/Widget.MaterialComponents.Button.TextButton"/>
 
@@ -105,22 +103,18 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:background="?attr/selectableItemBackground"
                 android:text="@android:string/cancel"
                 android:textAllCaps="true"
-                android:textStyle="bold"
                 style="@style/Widget.MaterialComponents.Button.TextButton"/>
 
-            <Button
+            <com.google.android.material.button.MaterialButton
                 android:id="@+id/confirm"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:background="?attr/selectableItemBackground"
                 android:text="@android:string/ok"
                 android:textAllCaps="true"
-                android:textStyle="bold"
-                style="@style/Widget.MaterialComponents.Button.TextButton.Dialog"/>
+                style="@style/Widget.MaterialComponents.Button.TextButton"/>
 
         </LinearLayout>
 

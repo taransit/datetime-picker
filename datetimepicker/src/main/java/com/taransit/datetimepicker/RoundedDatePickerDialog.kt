@@ -11,7 +11,7 @@ class RoundedDatePickerDialog(
     year: Int,
     month: Int,
     day: Int,
-    private var cornerRadius: Float = 0f
+    private val cornerRadius: Float = 0f
 ) : DatePickerDialog(
     context,
     listener,
