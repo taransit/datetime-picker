@@ -13,7 +13,7 @@ class MainActivity : AppCompatActivity(), DateTimePickerDialog.Listener {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        show_dialog.setOnClickListener {
+        showDialog.setOnClickListener {
             val ft = supportFragmentManager.beginTransaction()
             val prev = supportFragmentManager.findFragmentByTag(DateTimePickerDialog::class.java.simpleName)
             if (prev != null) {
@@ -32,7 +32,7 @@ class MainActivity : AppCompatActivity(), DateTimePickerDialog.Listener {
             }
         }
 
-        show_dialog.performClick()
+        showDialog.performClick()
     }
 
     override fun onDateTimeSet(calendar: Calendar, page: Int) {
