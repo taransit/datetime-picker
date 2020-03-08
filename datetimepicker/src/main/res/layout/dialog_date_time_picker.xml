@@ -79,11 +79,12 @@
                 android:id="@+id/showToday"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:fontFamily="@font/nunito_semibold"
                 android:gravity="center_horizontal"
                 android:padding="24dp"
                 android:text="@string/reset_time"
                 android:textAllCaps="false"
-                style="@style/Widget.MaterialComponents.Button.TextButton"/>
+                style="@style/Widget.MaterialComponents.Button.TextButton" />
 
         </LinearLayout>
 
@@ -103,6 +104,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:fontFamily="@font/nunito_semibold"
                 android:text="@android:string/cancel"
                 android:textAllCaps="true"
                 style="@style/Widget.MaterialComponents.Button.TextButton"/>
@@ -112,6 +114,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:fontFamily="@font/nunito_semibold"
                 android:text="@android:string/ok"
                 android:textAllCaps="true"
                 style="@style/Widget.MaterialComponents.Button.TextButton"/>
