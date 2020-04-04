@@ -84,7 +84,7 @@
                 android:padding="24dp"
                 android:text="@string/reset_time"
                 android:textAllCaps="false"
-                style="@style/Widget.MaterialComponents.Button.TextButton" />
+                style="?attr/borderlessButtonStyle" />
 
         </LinearLayout>
 
@@ -107,7 +107,7 @@
                 android:fontFamily="@font/nunito_semibold"
                 android:text="@android:string/cancel"
                 android:textAllCaps="true"
-                style="@style/Widget.MaterialComponents.Button.TextButton"/>
+                style="?attr/borderlessButtonStyle" />
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/confirm"
@@ -117,7 +117,7 @@
                 android:fontFamily="@font/nunito_semibold"
                 android:text="@android:string/ok"
                 android:textAllCaps="true"
-                style="@style/Widget.MaterialComponents.Button.TextButton"/>
+                style="?attr/borderlessButtonStyle" />
 
         </LinearLayout>
 

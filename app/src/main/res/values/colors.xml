@@ -1,7 +1,53 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#008577</color>
-    <color name="colorPrimaryDark">#00574B</color>
-    <color name="colorAccent">#DD2030</color>
+    <!-- Common -->
+    <!-- The primary brand color, used most predominantly in theming -->
+    <color name="colorPrimary">#fcd33a</color>
+    <!-- A lighter/darker variant of the primary brand color, used sparingly in theming -->
+    <color name="colorPrimaryVariant">#ebc931</color>
+    <!-- The color for elements displayed on top of the primary colors (eg. Text and icons) -->
+    <color name="colorOnPrimary">#000000</color>
+    <!-- The secondary brand color of the app, used mostly as an accent for certain widgets that need to stand out -->
+    <color name="colorSecondary">#683cb7</color>
+    <!-- NOTE: The colorSecondaryVariant is not used, but available - It's a lighter/darker variant of the secondary brand color -->
+    <!-- The color used for elements displayed on top of the secondary colors -->
+    <color name="colorOnSecondary">#FFFFFF</color>
+    <!-- The color used for errors -->
+    <color name="colorError">#D32F2F</color>
+    <!-- The color used for elements displayed on top of the error color -->
+    <color name="colorOnError">#FFFFFF</color>
+    <!-- The color used for surfaces (i.e. Material “sheets”) -->
+    <color name="colorSurface">#FFFFFF</color>
+    <!-- The color used for elements displayed on top of the surface color -->
+    <color name="colorOnSurface">#000000</color>
+    <!-- The color behind all other screen content -->
     <color name="colorBackground">#fedb37</color>
+    <!-- The color used for elements displayed on top of your background color -->
+    <color name="colorOnBackground">#000000</color>
+
+    <color name="transparent">#00000000</color>
+
+    <!-- Connections -->
+    <color name="connections_availability_available_text">@color/colorSecondary</color>
+    <color name="connections_availability_not_available_text">#7a625614</color>
+    <color name="connections_item_secondary_text">#5f5310</color>
+    <color name="connections_item_accent_text">@color/colorSecondary</color>
+
+    <!--Search-->
+    <color name="search_normal_button">#11000000</color>
+    <color name="loading_dialog_progress_bar">#6638be</color>
+    <color name="search_ripple">#33000000</color>
+    <color name="search_normal_button_hint">#80000000</color>
+
+    <!--Train Detail-->
+    <color name="train_detail_train_line">@color/colorSecondary</color>
+    <color name="train_detail_line">@color/colorPrimaryVariant</color>
+    <color name="train_detail_divider">#cccccc</color>
+    <color name="train_detail_time_between_stops">#fd8f8f8f</color>
+    <color name="train_detail_expand_shrink">@color/colorSecondary</color>
+    <color name="train_detail_on_time">#03cf2a</color>
+    <color name="train_detail_delay">#ee5858</color>
+    <color name="train_detail_date_background">#d2d2d2</color>
+
+    <color name="rate_us_dialog_button">@color/colorSecondary</color>
 </resources>
